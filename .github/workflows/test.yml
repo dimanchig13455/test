@@ -30,8 +30,11 @@ jobs:
       - name: Cache Nx
         uses: actions/cache@v3
         with:
-          path: "**/.nx"
-          key: nx-${{ hashFiles('**/.nx') }}
+          path: node_modules/.cache/nx
+          key: cache-nx-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.jobIndex }}-${{ github.sha }}
+          restore-keys: |
+            cache-nx-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.jobIndex }}-
+            cache-nx-${{ hashFiles('yarn.lock') }}-
 
       - name: Install packages
         if: steps.modules-cache.outputs.cache-hit != 'true'
