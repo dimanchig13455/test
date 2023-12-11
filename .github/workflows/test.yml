@@ -41,3 +41,7 @@ jobs:
 
       - name: Run test
         run: yarn test
+
+      - name: LS
+        shell: bash
+        run: ls
