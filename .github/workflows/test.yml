@@ -30,7 +30,7 @@ jobs:
       - name: Cache Nx
         uses: actions/cache@v3
         with:
-          path: ".nx"
+          path: "**/.nx"
           key: nx-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install packages
