@@ -24,10 +24,11 @@ jobs:
           key: yarn-${{ hashFiles('yarn.lock') }}
 
       - name: Cache Nx
-        uses: actions/cache@v3
+        uses: actions/cache@v2
         with:
           path: .nx
-          key: nx-${{ hashFiles('.nx/cache/lockfile.hash') }}
+          key: nx-${{ hashFiles('yarn.lock') }}-${{ github.sha }}
+          restore-keys: nx-${{ hashFiles('yarn.lock') }}-
 
       - name: Install packages
         if: steps.modules-cache.outputs.cache-hit != 'true'
