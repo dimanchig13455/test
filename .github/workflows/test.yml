@@ -31,7 +31,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: "**/.nx"
-          key: nx-${{ hashFiles('**/yarn.lock') }}
+          key: nx-${{ hashFiles('**/.nx') }}
 
       - name: Install packages
         if: steps.modules-cache.outputs.cache-hit != 'true'
