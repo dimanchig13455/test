@@ -27,6 +27,10 @@ jobs:
           path: "**/node_modules"
           key: node_modules-${{ hashFiles('**/yarn.lock') }}
 
+      - name: Install packages
+        if: steps.modules-cache.outputs.cache-hit != 'true'
+        run: yarn
+
       - name: Cache Nx
         uses: actions/cache@v3
         with:
@@ -35,10 +39,6 @@ jobs:
           restore-keys: |
             cache-nx-${{ hashFiles('yarn.lock') }}-${{ matrix.target }}-${{ matrix.jobIndex }}-
             cache-nx-${{ hashFiles('yarn.lock') }}-
-
-      - name: Install packages
-        if: steps.modules-cache.outputs.cache-hit != 'true'
-        run: yarn
 
       - name: Run test
         run: yarn test
