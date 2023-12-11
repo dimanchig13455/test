@@ -27,7 +27,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .nx
-          key: nx-${{ hashFiles('./.nx/cache/lockfile.hash') }}
+          key: nx-${{ hashFiles('.nx/cache/lockfile.hash') }}
 
       - name: Install packages
         if: steps.modules-cache.outputs.cache-hit != 'true'
@@ -35,3 +35,7 @@ jobs:
 
       - name: Run test
         run: yarn test
+
+      - name: hash
+        run: |
+          cat .nx/cache/lockfile.hash
